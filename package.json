@@ -1,0 +1,8 @@
+{
+  "name": "websocket-chat",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:Caster22/Websocket-Chat.git",
+  "author": "Michał Kopacz <kopaczmichal093@gmail.com>",
+  "license": "MIT"
+}
