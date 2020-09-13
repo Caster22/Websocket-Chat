@@ -7,6 +7,12 @@ const messageContentInput = document.getElementById('message-content');
 
 let userName;
 
+const socket = io();
+
+socket.on('message', ({ author, content }) => addMessage(author, content))
+socket.on('newPerson', ({ author, content }) => addMessage(author, content))
+socket.on('personLeft', ({ author, content }) => addMessage(author, content))
+
 const login = event => {
     event.preventDefault();
 
@@ -14,6 +20,7 @@ const login = event => {
         alert('You must enter your name!');
     } else {
         userName = userNameInput.value;
+        socket.emit('login', { user: userName });
         loginForm.classList.remove('show');
         messagesSection.classList.add('show');
     }
@@ -25,6 +32,7 @@ const sendMessage = event => {
         alert('You cant sent empty message!');
     } else {
         addMessage(userName, messageContentInput.value);
+        socket.emit('message', { author: userName, content: messageContentInput.value })
         messageContentInput.value = null;
     }
 };
